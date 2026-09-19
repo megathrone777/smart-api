@@ -1,7 +1,9 @@
 [project]
 dependencies = [
+    "bcrypt>=5.0.0",
     "fastapi[standard]>=0.141.1",
     "pydantic-settings>=2.15.0",
+    "pyjwt>=2.14.0",
     "python-dotenv>=1.2.3",
     "supabase>=2.31.0",
 ]
