@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from routers import tags
+from app.routers import tags
 
 app = FastAPI()
 app.include_router(tags.router)
