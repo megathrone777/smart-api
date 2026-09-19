@@ -71,3 +71,8 @@ things to remember:
   (`from app.routers import tags`) — making third-party/vendor imports
   (`from fastapi import ...`, `from supabase import ...`) easy to
   distinguish from your own code.
+- No `__pycache__/` folders ever appear inside `app/`: bytecode is
+  redirected to a central cache via the user-level env var
+  `PYTHONPYCACHEPREFIX` (set with
+  `setx PYTHONPYCACHEPREFIX "%LOCALAPPDATA%\Python\pycache"`).
+  Restart the terminal after setting it.
