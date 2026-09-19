@@ -10,3 +10,5 @@ dependencies = [
     "python-dotenv>=1.2.3",
     "supabase>=2.31.0",
 ]
+[tool.fastapi]
+entrypoint = "src.main:app"
