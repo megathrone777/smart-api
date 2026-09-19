@@ -1,0 +1,88 @@
++--------------------- Traceback (most recent call last) ---------------------+
+| C:\Users\krol2\Desktop\smart-api\.venv\Lib\site-packages\fastapi_cli\cli.py |
+| :521 in run                                                                 |
+|                                                                             |
+|   518                                                                       |
+|   519     Otherwise, it uses the first [bold]FastAPI[/bold] app found in    |
+|       the imported module or package.                                       |
+|   520     """                                                               |
+| > 521     _run(                                                             |
+|   522         path=path,                                                    |
+|   523         host=host,                                                    |
+|   524         port=port,                                                    |
+|                                                                             |
+| C:\Users\krol2\Desktop\smart-api\.venv\Lib\site-packages\fastapi_cli\cli.py |
+| :167 in _run                                                                |
+|                                                                             |
+|   164             raise typer.Exit(code=1)                                  |
+|   165                                                                       |
+|   166         try:                                                          |
+| > 167             config = FastAPIConfig.resolve(entrypoint=entrypoint)     |
+|   168         except ValidationError as e:                                  |
+|   169             toolkit.print_line()                                      |
+|   170             toolkit.print("[error]Invalid configuration in            |
+|       pyproject.toml:")                                                     |
+|                                                                             |
+| C:\Users\krol2\Desktop\smart-api\.venv\Lib\site-packages\fastapi_cli\config |
+| .py:38 in resolve                                                           |
+|                                                                             |
+|   35                                                                        |
+|   36     @classmethod                                                       |
+|   37     def resolve(cls, entrypoint: str | None = None) ->                 |
+|      "FastAPIConfig":                                                       |
+| > 38         config = cls._read_pyproject_toml()                            |
+|   39                                                                        |
+|   40         if entrypoint is not None:                                     |
+|   41             config["entrypoint"] = entrypoint                          |
+|                                                                             |
+| C:\Users\krol2\Desktop\smart-api\.venv\Lib\site-packages\fastapi_cli\config |
+| .py:32 in _read_pyproject_toml                                              |
+|                                                                             |
+|   29                 return {}                                              |
+|   30                                                                        |
+|   31         with open(pyproject_path, "rb") as f:                          |
+| > 32             data = tomllib.load(f)                                     |
+|   33                                                                        |
+|   34             return data.get("tool", {}).get("fastapi", {})  # type:    |
+|      ignore[no-any-return]                                                  |
+|   35                                                                        |
+|                                                                             |
+| C:\Users\krol2\AppData\Local\Python\pythoncore-3.14-64\Lib\tomllib\_parser. |
+| py:141 in load                                                              |
+|                                                                             |
+|   138         raise TypeError(                                              |
+|   139             "File must be opened in binary mode, e.g. use             |
+|       `open('foo.toml', 'rb')`"                                             |
+|   140         ) from None                                                   |
+| > 141     return loads(s, parse_float=parse_float)                          |
+|   142                                                                       |
+|   143                                                                       |
+|   144 def loads(s: str, /, *, parse_float: ParseFloat = float) -> dict[str, |
+|       Any]:  # noqa: C901                                                   |
+|                                                                             |
+| C:\Users\krol2\AppData\Local\Python\pythoncore-3.14-64\Lib\tomllib\_parser. |
+| py:193 in loads                                                             |
+|                                                                             |
+|   190             if second_char == "[":                                    |
+|   191                 pos, header = create_list_rule(src, pos, out)         |
+|   192             else:                                                     |
+| > 193                 pos, header = create_dict_rule(src, pos, out)         |
+|   194             pos = skip_chars(src, pos, TOML_WS)                       |
+|   195         elif char != "#":                                             |
+|   196             raise TOMLDecodeError("Invalid statement", src, pos)      |
+|                                                                             |
+| C:\Users\krol2\AppData\Local\Python\pythoncore-3.14-64\Lib\tomllib\_parser. |
+| py:371 in create_dict_rule                                                  |
+|                                                                             |
+|   368     pos, key = parse_key(src, pos)                                    |
+|   369                                                                       |
+|   370     if out.flags.is_(key, Flags.EXPLICIT_NEST) or out.flags.is_(key,  |
+|       Flags.FROZEN):                                                        |
+| > 371         raise TOMLDecodeError(f"Cannot declare {key} twice", src,     |
+|       pos)                                                                  |
+|   372     out.flags.set(key, Flags.EXPLICIT_NEST, recursive=False)          |
+|   373     try:                                                              |
+|   374         out.data.get_or_create_nest(key)                              |
++-----------------------------------------------------------------------------+
+TOMLDecodeError: Cannot declare ('tool', 'fastapi') twice (at line 16, column 
+14)
