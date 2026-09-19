@@ -6,4 +6,4 @@ app.include_router(tags.router)
 
 @app.get("/")
 async def root():
-	return {"message": "Hello World"}
+	return {"message": "Hello"}
