@@ -8,9 +8,7 @@ from app.helpers.get_all import _strip_seq
 
 
 def get_by_id(name: str, id_: Any) -> dict[str, Any] | None:
-    # supabase-py's maybe_single() returns the row dict (or None) directly,
-    # mirroring supabase-js.
-    data = (
+    response = (
         supabase.table(name)
         .select("*")
         .eq(id_fields[name], id_)
@@ -18,7 +16,7 @@ def get_by_id(name: str, id_: Any) -> dict[str, Any] | None:
         .execute()
     )
 
-    if not data:
+    if not response or not response.data:
         return None
 
-    return _strip_seq(data)
+    return _strip_seq(response.data)
